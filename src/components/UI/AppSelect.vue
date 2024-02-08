@@ -27,7 +27,7 @@
 <template>
     <select
         @change="(event) => {
-                changeFunc(event)
+                changeFunc(event.target.value)
             }
         "
     >

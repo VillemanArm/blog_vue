@@ -14,11 +14,11 @@
 </script>
 
 <template>
-    <div class="modal__wrapper" @click="close()">
+    <div class="modal__wrapper" @click="close(false)">
         <div @click.stop className="modal">
             <div class="modal__head">
                 <h2>{{ header }}</h2>
-                <div class="modal__close" @click="close()">
+                <div class="modal__close" @click="close(false)">
                     <X :size="36" />
                 </div>
             </div>

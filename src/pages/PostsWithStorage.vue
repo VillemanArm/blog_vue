@@ -12,44 +12,6 @@
                 
             }
         },
-        methods: {
-            ...mapMutations({
-                setPage: 'post/setPage',
-                setSearchQuery: 'post/setSearchQuery'
-            }),
-            ...mapActions({
-                getPosts: 'post/getPosts',
-                loadMorePosts:'post/loadMorePosts',
-            }),
-            // openModal() {
-            //     this.isCreatePost = true
-            //     document.body.style.overflow = "hidden"
-            // },
-            // closeModal() {
-            //     this.isCreatePost = false
-            //     document.body.style.overflow = "visible"
-            // },
-            // addPost(newPost) {
-            //     this.posts.push(newPost)
-            // },
-            // delPost(postId) {
-            //     this.posts = this.posts.filter((post) => post.id != postId)
-            // },
-            
-            // selectSortOption(event) {
-            //     this.sortOption = event.target.value
-            // },
-            // findPost(query) {
-            //     this.searchQuery = query.trim().toLowerCase()
-            // }, 
-            // changePage(pageNumber) {
-            //     this.page = pageNumber
-                
-            // }
-        },
-        mounted() {
-            this.getPosts()
-        },
         computed: {
             ...mapState({
                 isCreatePost: state => state.post.isCreatePost,
@@ -68,20 +30,45 @@
                 sortedAndSearchedPosts: 'post/sortedAndSearchedPosts'
             }),
         },
-        watch: {
-            // page() {
-            //     this.getPosts()
-            // }
-        }
+        methods: {
+            ...mapMutations({
+                setPage: 'post/setPage',
+                setSearchQuery: 'post/setSearchQuery',
+                setSortOption: 'post/setSortOption',
+                setCreatePost: 'post/setCreatePost',
+                addPost: 'post/addPost',
+                delPost: 'post/delPost',
+            }),
+            ...mapActions({
+                getPosts: 'post/getPosts',
+                loadMorePosts:'post/loadMorePosts',
+            }),
+
+        },
+        mounted() {
+            this.getPosts()
+        },
     }
 </script>
 
 <template>
-    <section class="container">
-        <AppButton @click="openModal" class="create-button"> Create post </AppButton>
-        <Modal v-if="isCreatePost" :header="'Create post'" :close="closeModal">
+    <section class="container posts-management">
+        <AppButton @click="setCreatePost(true)" class="posts-management__create-btn"> Create post </AppButton>
+        <Modal v-if="isCreatePost" :header="'Create post'" :close="setCreatePost">
             <NewPostForm @create="addPost" />
         </Modal>
+        <div class="posts-management__functions">
+            <AppInput 
+                class="posts__search-input"
+                :changeFunc="setSearchQuery"
+            />
+            <AppSelect
+                class="posts__sort-select"
+                :options="sortOptions"
+                :changeFunc="setSortOption"
+                :defaultLabel="'sort by'"
+            ></AppSelect>
+        </div>
     </section>
 
     <section class="container">
@@ -95,17 +82,6 @@
         />
         <div v-else>Posts is loading</div>
         <div v-intersection="{ loadMorePosts }" ref="observer" class="observer"></div>
-        <div class="pages__wrapper">
-            <div 
-            v-for="pageNumber in totalPages" 
-            :key="pageNumber" 
-            :class="{
-                'pages__button': true,
-                'pages__current-page': page === pageNumber,
-            }"
-            @click="changePage(pageNumber)"
-        >{{ pageNumber }}</div>
-        </div> 
     </section>
 </template>
 
@@ -118,11 +94,19 @@
         font-family: Ubuntu
         box-sizing: border-box
 
-    .create-button
-        width: 100%
-        margin: 16rem 0
+    .posts-management
+        padding: 16rem 0
+        display: flex
+        justify-content: space-between
+        align-items: center
 
-        border-radius: 40rem !important
+    .posts-management__create-btn
+        width: 200rem
+
+    .posts-management__functions
+        display: flex
+        justify-content: end
+        gap: 8rem
 
     .pages__wrapper
         display: flex

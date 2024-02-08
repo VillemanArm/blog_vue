@@ -36,18 +36,6 @@
 
 <template>
     <div className="posts__container">
-        <div class="posts__functions">
-            <AppInput 
-                class="posts__search-input"
-                :changeFunc="findPost"
-            />
-            <AppSelect
-                class="posts__sort-select"
-                :options="sortOptions"
-                :changeFunc="selectSortOption"
-                :defaultLabel="'sort by'"
-            ></AppSelect>
-        </div>
         <transition-group name="post-list" >
             <Post
                 v-for="post in posts" 
@@ -56,7 +44,6 @@
                 @delPost="delPost"
             />
         </transition-group>
-
     </div>
 </template>
 
@@ -65,13 +52,6 @@
         display: flex
         align-items: center
         flex-direction: column
-
-    .posts__functions
-        width: 100%
-        padding-bottom: 12rem
-        display: flex
-        justify-content: end
-        gap: 8rem
 
     .post-list-move, 
     .post-list-enter-active, 
