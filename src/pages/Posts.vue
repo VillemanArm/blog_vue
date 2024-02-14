@@ -58,11 +58,11 @@
             <NewPostForm @create="addPost" />
         </Modal>
         <div class="posts-management__functions">
-            <AppInput 
+            <AppInput id="search-input"
                 class="posts__search-input"
                 :changeFunc="setSearchQuery"
             />
-            <AppSelect
+            <AppSelect id="sort-select"
                 class="posts__sort-select"
                 :options="sortOptions"
                 :changeFunc="setSortOption"
@@ -77,7 +77,6 @@
             :posts="sortedAndSearchedPosts"
             @delPost="delPost"
             :sortOptions="sortOptions"
-            :selectSortOption="selectSortOption"
             :findPost="setSearchQuery"
         />
         <div v-else>Posts is loading</div>

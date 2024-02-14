@@ -14,10 +14,6 @@
                 type: Array,
                 required: true,
             },
-            selectSortOption: {
-                type: Function,
-                required: true,
-            },
             findPost: {
                 type: Function,
                 required: true,
