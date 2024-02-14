@@ -1,5 +1,3 @@
-// TODO: передать в postlist количество страниц и сделать соответствующую пагинацию
-
 <script>
     import NewPostForm from "@/components/NewPostForm.vue"
     import PostList from "@/components/PostsList.vue"
@@ -70,14 +68,10 @@
             ></AppSelect>
         </div>
     </section>
-
+ 
     <section class="container">
         <PostList
             v-if="!isPostsLoading"
-            :posts="sortedAndSearchedPosts"
-            @delPost="delPost"
-            :sortOptions="sortOptions"
-            :findPost="setSearchQuery"
         />
         <div v-else>Posts is loading</div>
         <div v-intersection="{ loadMorePosts }" ref="observer" class="observer"></div>

@@ -9,14 +9,6 @@
                 required: true,
             },
         },
-        data() {
-            return {}
-        },
-        methods: {
-            delPost() {
-                this.$emit("delPost", this.post.id)
-            },
-        },
     }
 </script>
 
@@ -29,7 +21,7 @@
             <div className="post__button">
                 <FileEdit :size="28" />
             </div>
-            <div className="post__button" @click="delPost()">
+            <div className="post__button" @click="$store.commit('posts/delPost', this.post.id)">
                 <Trash2 :size="28" />
             </div>
         </div>

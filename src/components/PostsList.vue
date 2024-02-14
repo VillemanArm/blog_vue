@@ -1,32 +1,8 @@
 <script>
     import Post from "@/components/Post.vue"
-    // import AppInput from "./UI/AppInput.vue"
-
 
     export default {
         components: { Post },
-        props: {
-            posts: {
-                type: Array,
-                required: true,
-            },
-            sortOptions: {
-                type: Array,
-                required: true,
-            },
-            findPost: {
-                type: Function,
-                required: true,
-            },
-        },
-        data() {
-            return {}
-        },
-        methods: {
-            delPost(postId) {
-                this.$emit("delPost", postId)
-            },
-        },
     }
 </script>
 
@@ -34,10 +10,9 @@
     <div className="posts__container">
         <transition-group name="post-list" >
             <Post
-                v-for="post in posts" 
+                v-for="post in $store.getters['posts/sortedAndSearchedPosts']" 
                 :key="post.id"
                 :post="post"
-                @delPost="delPost"
             />
         </transition-group>
     </div>
