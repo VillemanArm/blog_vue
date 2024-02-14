@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const postModule = {
+export const postsModule = {
     state: () => {
         return {
             isCreatePost: false,

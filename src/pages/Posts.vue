@@ -3,122 +3,72 @@
 <script>
     import NewPostForm from "@/components/NewPostForm.vue"
     import PostList from "@/components/PostsList.vue"
-    import axios from "axios"
+    import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
 
     export default {
         components: { NewPostForm, PostList },
         data() {
             return {
-                isCreatePost: false,
-                isPostsLoading: false,
-                posts: [],
-                sortOptions: [
-                    {
-                        value: "title",
-                        name: "title",
-                    },
-                    {
-                        value: "body",
-                        name: "content",
-                    },
-                ],
-                sortOption: "",
-                searchQuery: "",
-                page: 1,
-                limit: 10,
-                totalPages: 0,
+                
             }
         },
+        computed: {
+            ...mapState({
+                isCreatePost: state => state.posts.isCreatePost,
+                isPostsLoading: state => state.posts.isPostsLoading,
+                posts: state => state.posts.posts,
+                sortOptions: state => state.posts.sortOptions,
+                    
+                sortOption: state => state.posts.sortOption,
+                searchQuery: state => state.posst.searchQuery,
+                page: state => state.posts.page,
+                limit: state => state.posts.limit,
+                totalPages: state => state.posts.totalPages,
+            }),
+            ...mapGetters({
+                sortedPosts: 'posts/sortedPosts',           
+                sortedAndSearchedPosts: 'posts/sortedAndSearchedPosts'
+            }),
+        },
         methods: {
-            openModal() {
-                this.isCreatePost = true
-                document.body.style.overflow = "hidden"
-            },
-            closeModal() {
-                this.isCreatePost = false
-                document.body.style.overflow = "visible"
-            },
-            addPost(newPost) {
-                this.posts.push(newPost)
-            },
-            delPost(postId) {
-                this.posts = this.posts.filter((post) => post.id != postId)
-            },
-            async getPosts() {
-                try {
-                    this.isPostsLoading = true
-                    const response = await axios.get(
-                        `https://jsonplaceholder.typicode.com/posts`, {
-                            params: {
-                                _page: this.page,
-                                _limit: this.limit
-                            }
-                        }
-                    )
-                    this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-                    this.posts = response.data
-                } catch (error) {
-                    console.log(error.message)
-                } finally {
-                    this.isPostsLoading = false
-                }
-            },
-            async loadMorePosts() {
-                try {
-                    this.page += 1
-                    const response = await axios.get(
-                        `https://jsonplaceholder.typicode.com/posts`, {
-                            params: {
-                                _page: this.page,
-                                _limit: this.limit
-                            }
-                        }
-                    )
-                    this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-                    this.posts = [...this.posts, ...response.data]
-                } catch (error) {
-                    console.log(error.message)
-                } 
-            },
-            selectSortOption(event) {
-                this.sortOption = event.target.value
-            },
-            findPost(query) {
-                this.searchQuery = query.trim().toLowerCase()
-            }, 
-            // changePage(pageNumber) {
-            //     this.page = pageNumber
-                
-            // }
+            ...mapMutations({
+                setPage: 'posts/setPage',
+                setSearchQuery: 'posts/setSearchQuery',
+                setSortOption: 'posts/setSortOption',
+                setCreatePost: 'posts/setCreatePost',
+                addPost: 'posts/addPost',
+                delPost: 'posts/delPost',
+            }),
+            ...mapActions({
+                getPosts: 'posts/getPosts',
+                loadMorePosts:'posts/loadMorePosts',
+            }),
+
         },
         mounted() {
             this.getPosts()
-            
-
-
         },
-        computed: {
-            sortedPosts() {
-                return [...this.posts].sort((post1, post2) => post1[this.sortOption]?.localeCompare(post2[this.sortOption]))
-            },
-            sortedAndSearchedPosts() {
-                return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery) || post.body.toLowerCase().includes(this.searchQuery))
-            },
-        },
-        watch: {
-            // page() {
-            //     this.getPosts()
-            // }
-        }
     }
 </script>
 
 <template>
-    <section class="container">
-        <AppButton @click="openModal" class="create-button"> Create post </AppButton>
-        <Modal v-if="isCreatePost" :header="'Create post'" :close="closeModal">
+    <section class="container posts-management">
+        <AppButton @click="setCreatePost(true)" class="posts-management__create-btn"> Create post </AppButton>
+        <Modal v-if="isCreatePost" :header="'Create post'" :close="setCreatePost">
             <NewPostForm @create="addPost" />
         </Modal>
+        <div class="posts-management__functions">
+            <AppInput 
+                class="posts__search-input"
+                :changeFunc="setSearchQuery"
+            />
+            <AppSelect
+                class="posts__sort-select"
+                :options="sortOptions"
+                :changeFunc="setSortOption"
+                :defaultLabel="'sort by'"
+            ></AppSelect>
+        </div>
     </section>
 
     <section class="container">
@@ -128,21 +78,10 @@
             @delPost="delPost"
             :sortOptions="sortOptions"
             :selectSortOption="selectSortOption"
-            :findPost="findPost"
+            :findPost="setSearchQuery"
         />
         <div v-else>Posts is loading</div>
         <div v-intersection="{ loadMorePosts }" ref="observer" class="observer"></div>
-        <!-- <div class="pages__wrapper">
-            <div 
-            v-for="pageNumber in totalPages" 
-            :key="pageNumber" 
-            :class="{
-                'pages__button': true,
-                'pages__current-page': page === pageNumber,
-            }"
-            @click="changePage(pageNumber)"
-        >{{ pageNumber }}</div>
-        </div> -->
     </section>
 </template>
 
@@ -155,11 +94,19 @@
         font-family: Ubuntu
         box-sizing: border-box
 
-    .create-button
-        width: 100%
-        margin: 16rem 0
+    .posts-management
+        padding: 16rem 0
+        display: flex
+        justify-content: space-between
+        align-items: center
 
-        border-radius: 40rem !important
+    .posts-management__create-btn
+        width: 200rem
+
+    .posts-management__functions
+        display: flex
+        justify-content: end
+        gap: 8rem
 
     .pages__wrapper
         display: flex
