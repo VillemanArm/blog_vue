@@ -8,13 +8,14 @@
 
 <template>
     <div className="posts__container">
-        <transition-group name="post-list" >
+        <!-- <transition-group name="post-list" > -->
             <Post
-                v-for="post in $store.getters['posts/sortedAndSearchedPosts']" 
+                v-for="post, index in $store.getters['posts/sortedAndSearchedPosts']" 
                 :key="post.id"
                 :post="post"
+                :postIndex="index"
             />
-        </transition-group>
+        <!-- </transition-group> -->
     </div>
 </template>
 

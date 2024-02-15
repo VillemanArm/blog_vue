@@ -2,13 +2,24 @@
     import { Trash2, FileEdit, BookOpenText } from "lucide-vue-next"
 
     export default {
-        components: { Trash2, FileEdit, BookOpenText },
+        components: { Trash2, FileEdit, BookOpenText},
         props: {
             post: {
                 type: Object,
                 required: true,
             },
+            postIndex: {
+                type: Number,
+                required: true,
+            },
         },
+        methods: {
+            editPost() {
+                this.$store.commit('posts/setEditPost', true)
+                this.$store.commit('posts/setEditedPostId', this.postIndex)
+
+            },
+        }
     }
 </script>
 
@@ -19,7 +30,7 @@
                 <BookOpenText :size="28" />
             </div>
             <div className="post__button">
-                <FileEdit :size="28" />
+                <FileEdit :size="28" @click="editPost"/>
             </div>
             <div className="post__button" @click="$store.commit('posts/delPost', this.post.id)">
                 <Trash2 :size="28" />

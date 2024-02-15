@@ -1,18 +1,16 @@
 <script>
     import NewPostForm from "@/components/NewPostForm.vue"
+    import EditPostForm from "@/components/EditPostForm.vue"
     import PostList from "@/components/PostsList.vue"
     import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
 
     export default {
-        components: { NewPostForm, PostList },
-        data() {
-            return {
-                
-            }
-        },
+        components: { NewPostForm, PostList, EditPostForm },
         computed: {
             ...mapState({
                 isCreatePost: state => state.posts.isCreatePost,
+                isEditPost: state => state.posts.isEditPost,
+                editedPostId: state => state.posts.editedPostId,
                 isPostsLoading: state => state.posts.isPostsLoading,
                 posts: state => state.posts.posts,
                 sortOptions: state => state.posts.sortOptions,
@@ -36,6 +34,7 @@
                 setCreatePost: 'posts/setCreatePost',
                 addPost: 'posts/addPost',
                 delPost: 'posts/delPost',
+                setEditPost: 'posts/setEditPost',
             }),
             ...mapActions({
                 getPosts: 'posts/getPosts',
@@ -44,7 +43,7 @@
 
         },
         mounted() {
-            this.getPosts()
+            this.getPosts()      
         },
     }
 </script>
@@ -52,8 +51,11 @@
 <template>
     <section class="container posts-management">
         <AppButton @click="setCreatePost(true)" class="posts-management__create-btn"> Create post </AppButton>
-        <Modal v-if="isCreatePost" :header="'Create post'" :close="setCreatePost">
-            <NewPostForm @create="addPost" />
+        <Modal  v-if="isCreatePost" :header="'Create post'" :close="setCreatePost">
+            <NewPostForm />
+        </Modal>
+        <Modal v-if="isEditPost" :header="'Edit post'" :close="setEditPost">
+            <EditPostForm/>
         </Modal>
         <div class="posts-management__functions">
             <AppInput id="search-input"

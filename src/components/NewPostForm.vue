@@ -1,30 +1,35 @@
 <script>
-    // import AppButton from "./UI/AppButton.vue"
 
     export default {
-        // components: { AppButton },
         data() {
             return {}
         },
         methods: {
-            createPost() {
+            publishPost() {
                 const newPost = {
                     id: Date.now(),
                     title: this.$refs.newPostTitle.value.trim(),
                     body: this.$refs.newPostContent.value.trim(),
                 }
-                this.$emit("create", newPost) // создание события с именем  create
+
+                this.$store.commit('posts/addPost', newPost)
                 this.$refs.newPost.reset()
             },
+            clearForm() {
+                this.$refs.newPost.reset()
+            }
         },
     }
 </script>
 
 <template>
     <form ref="newPost" className="post-creation" @submit.prevent>
-        <input v-focus ref="newPostTitle" type="text" placeholder="Title" />
-        <textarea ref="newPostContent" placeholder="Content"></textarea>
-        <AppButton @click="createPost">publish</AppButton>
+        <input id="create-post-header" v-focus ref="newPostTitle" type="text" placeholder="Title" />
+        <textarea id="create-post-body" ref="newPostContent" placeholder="Content"></textarea>
+        <div class="post-creation__management">
+            <AppButton class="post-creation__button" @click="publishPost">publish</AppButton>
+            <AppButton class="post-creation__button" @click="clearForm">clear</AppButton>
+        </div>
     </form>
 </template>
 
@@ -49,4 +54,13 @@
         & textarea
             height: 270rem
             resize: none
+
+    .post-creation__management
+        display: flex
+        gap: 12rem
+        justify-content: end
+
+        &>button
+            width: 120rem
+
 </style>

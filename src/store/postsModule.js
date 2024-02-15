@@ -4,6 +4,8 @@ export const postsModule = {
     state: () => {
         return {
             isCreatePost: false,
+            isEditPost: false,
+            editedPostId: '',
             isPostsLoading: false,
             posts: [],
             sortOptions: [
@@ -39,6 +41,12 @@ export const postsModule = {
         setCreatePost(state, bool) {
             state.isCreatePost = bool
         },
+        setEditPost(state, bool) {
+            state.isEditPost = bool
+        },
+        setEditedPostId(state, postId) {
+            state.editedPostId = postId
+        },
         setPostsLoading(state, bool) {
             state.isPostsLoading = bool
         },
@@ -59,6 +67,9 @@ export const postsModule = {
         },
         delPost(state, postId) {
             state.posts = state.posts.filter((post) => post.id != postId)
+        },
+        editPost(state, postId, newPost) {
+            state.posts[postId] = newPost
         },
     },
     actions: {
