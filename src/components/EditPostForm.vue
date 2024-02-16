@@ -2,45 +2,47 @@
 
     export default {
         data() {
-            return {}
+            return {
+                post: this.$store.getters['posts/sortedAndSearchedPosts'][this.$store.state.posts.editedPostIndex],
+
+            }
         },
         methods: {
             publishPost() {
-                // const editedPost = {
-                //     id: postId,
-                //     title: this.$refs.newPostTitle.value.trim(),
-                //     body: this.$refs.newPostContent.value.trim(),
-                // }
+                const editedPost = {
+                    id: this.post.id,
+                    title: this.$refs.postTitle.value.trim(),
+                    body: this.$refs.postContent.value.trim(),
+                }
 
-                this.$store.commit('posts/editPost', postId, editedPost)
-                this.$refs.editPost.reset()
+                this.$store.commit('posts/editPost', editedPost)
+                this.$refs.editablePost.reset()
+                this.$store.commit('posts/setEditPost', false)
             },
             clearForm() {
-                this.$refs.editPost.reset()
+                this.$refs.editablePost.reset()
             }
         },
-        mounted() {
-            const post = this.$store.getters['posts/sortedAndSearchedPosts'][this.$store.state.posts.editedPostId]
-
-            this.$refs.editPostTitle.value = post.title
-            this.$refs.editPostContent.value = post.body
+        mounted() {     
+            this.$refs.postTitle.value = this.post.title
+            this.$refs.postContent.value = this.post.body
         }
     }
 </script>
 
 <template>
-    <form ref="editPost" className="post-editing" @submit.prevent>
-        <input id="edit-post-header" v-focus ref="editPostTitle" type="text" placeholder="Title" />
-        <textarea id="edit-post-body" ref="editPostContent" placeholder="Content"></textarea>
-        <div class="post-editing__management">
-            <AppButton class="post__button" @click="publishPost">publish</AppButton>
-            <AppButton class="post__button" @click="clearForm">clear</AppButton>
+    <form ref="editablePost" className="editable-post" @submit.prevent>
+        <input id="post-title" v-focus ref="postTitle" type="text" placeholder="Title" />
+        <textarea id="post-content" ref="postContent" placeholder="Content"></textarea>
+        <div class="editable-post__management">
+            <AppButton @click="publishPost">publish</AppButton>
+            <AppButton @click="clearForm">clear</AppButton>
         </div>
     </form>
 </template>
 
 <style scoped lang="sass">
-    .post-editing
+    .editable-post
         display: flex
         flex-direction: column
 
@@ -55,7 +57,7 @@
             height: 270rem
             resize: none
 
-    .post-editing__management
+    .editable-post__management
         display: flex
         gap: 12rem
         justify-content: end

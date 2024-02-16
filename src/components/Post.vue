@@ -16,8 +16,7 @@
         methods: {
             editPost() {
                 this.$store.commit('posts/setEditPost', true)
-                this.$store.commit('posts/setEditedPostId', this.postIndex)
-
+                this.$store.commit('posts/setEditedPostIndex', this.postIndex)
             },
         }
     }

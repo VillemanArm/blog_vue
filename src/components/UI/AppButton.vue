@@ -10,7 +10,7 @@
 </script>
 
 <template>
-    <button>
+    <button type="button">
         <slot></slot>
     </button>
 </template>

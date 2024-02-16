@@ -51,33 +51,34 @@
 <template>
     <section class="container posts-management">
         <AppButton @click="setCreatePost(true)" class="posts-management__create-btn"> Create post </AppButton>
-        <Modal  v-if="isCreatePost" :header="'Create post'" :close="setCreatePost">
-            <NewPostForm />
-        </Modal>
-        <Modal v-if="isEditPost" :header="'Edit post'" :close="setEditPost">
-            <EditPostForm/>
-        </Modal>
         <div class="posts-management__functions">
             <AppInput id="search-input"
-                class="posts__search-input"
-                :changeFunc="setSearchQuery"
+            class="posts__search-input"
+            :changeFunc="setSearchQuery"
             />
             <AppSelect id="sort-select"
-                class="posts__sort-select"
-                :options="sortOptions"
-                :changeFunc="setSortOption"
-                :defaultLabel="'sort by'"
+            class="posts__sort-select"
+            :options="sortOptions"
+            :changeFunc="setSortOption"
+            :defaultLabel="'sort by'"
             ></AppSelect>
         </div>
     </section>
- 
+    
     <section class="container">
         <PostList
-            v-if="!isPostsLoading"
+        v-if="!isPostsLoading"
         />
         <div v-else>Posts is loading</div>
         <div v-intersection="{ loadMorePosts }" ref="observer" class="observer"></div>
     </section>
+    
+    <Modal  v-if="isCreatePost" :header="'Create post'" :close="setCreatePost">
+        <NewPostForm />
+    </Modal>
+    <Modal v-if="isEditPost" :header="'Edit post'" :close="setEditPost">
+        <EditPostForm />
+    </Modal>
 </template>
 
 <style lang="sass">
