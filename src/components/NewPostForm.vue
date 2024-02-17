@@ -6,15 +6,18 @@
         },
         methods: {
             publishPost() {
+                let date = new Date
+                date = date.toLocaleDateString('ru').split('.').reverse().join('.')
                 const newPost = {
                     id: Date.now(),
-                    date: new Date.toLocaleDateString(),
+                    date: date,
                     title: this.$refs.newPostTitle.value.trim(),
                     body: this.$refs.newPostContent.value.trim(),
                 }
 
                 this.$store.commit('posts/addPost', newPost)
-                this.$refs.newPost.reset()
+                this.$store.dispatch('posts/addPostToDB', newPost)
+                this.$refs.newPost.reset()           
             },
             clearForm() {
                 this.$refs.newPost.reset()

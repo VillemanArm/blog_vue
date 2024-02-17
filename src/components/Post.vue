@@ -36,7 +36,8 @@
             </div>
         </div>
         <h2>{{ post.title }}</h2>
-        <p>{{ post.body }}</p>
+        <p class="content">{{ post.body }}</p>
+        <p class="date">{{ post.date }}</p>
     </div>
 </template>
 
@@ -61,4 +62,7 @@
 
     h2
         margin-bottom: 12rem
+
+    .date
+        margin-top: 8rem
 </style>

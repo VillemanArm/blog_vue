@@ -20,7 +20,7 @@ export const postsModule = {
             ],
             sortOption: "",
             searchQuery: "",
-            serverURL: `https://dazzling-chipped-pie.glitch.me/posts`,
+            serverURL: `https://gem-toothsome-leo.glitch.me/posts`,
             page: 1,
             limit: 10,
             totalPages: 0,
@@ -64,7 +64,7 @@ export const postsModule = {
             state.totalPages = pagesAmount
         },
         addPost(state, newPost) {
-            state.posts.push(newPost)
+            state.posts.unshift(newPost)
         },
         delPost(state, postId) {
             state.posts = state.posts.filter((post) => post.id != postId)
@@ -81,6 +81,8 @@ export const postsModule = {
                 const response = await axios.get(
                     state.serverURL, {
                         params: {
+                            _sort: 'date,id',
+                            _order: 'desc,desc',
                             _page: state.page,
                             _per_page: state.limit
                         }
@@ -100,6 +102,8 @@ export const postsModule = {
                 const response = await axios.get(
                     state.serverURL, {
                         params: {
+                            _sort: 'date,id',
+                            _order: 'desc,desc',
                             _page: state.page,
                             _per_page: state.limit
                         }
@@ -111,6 +115,13 @@ export const postsModule = {
                 console.log(error.message)
             } 
         },
+        async addPostToDB({state}, newPost) {
+            try {
+                const response = await axios.post(state.serverURL, newPost)
+            } catch (error) {
+                console.log(error.message)
+            } 
+        }
     },
     namespaced: true,
 }
