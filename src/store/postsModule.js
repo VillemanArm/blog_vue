@@ -20,6 +20,7 @@ export const postsModule = {
             ],
             sortOption: "",
             searchQuery: "",
+            serverURL: `https://dazzling-chipped-pie.glitch.me/posts`,
             page: 1,
             limit: 10,
             totalPages: 0,
@@ -78,10 +79,10 @@ export const postsModule = {
             try {
                 commit('setPostsLoading', true)
                 const response = await axios.get(
-                    `https://jsonplaceholder.typicode.com/posts`, {
+                    state.serverURL, {
                         params: {
                             _page: state.page,
-                            _limit: state.limit
+                            _per_page: state.limit
                         }
                     }
                 )
@@ -97,10 +98,10 @@ export const postsModule = {
             try {
                 commit('setPage', state.page += 1)
                 const response = await axios.get(
-                    `https://jsonplaceholder.typicode.com/posts`, {
+                    state.serverURL, {
                         params: {
                             _page: state.page,
-                            _limit: state.limit
+                            _per_page: state.limit
                         }
                     }
                 )

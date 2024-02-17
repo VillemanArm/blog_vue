@@ -8,6 +8,7 @@
             publishPost() {
                 const newPost = {
                     id: Date.now(),
+                    date: new Date.toLocaleDateString(),
                     title: this.$refs.newPostTitle.value.trim(),
                     body: this.$refs.newPostContent.value.trim(),
                 }
