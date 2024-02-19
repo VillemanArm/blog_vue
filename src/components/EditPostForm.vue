@@ -19,6 +19,7 @@
                 this.$store.commit('posts/editPost', editedPost)
                 this.$refs.editablePost.reset()
                 this.$store.commit('posts/setEditPost', false)
+                this.$store.commit('posts/setCreatePost', false) 
                 this.$store.dispatch('posts/editPostInDB', editedPost)
             },
             clearForm() {

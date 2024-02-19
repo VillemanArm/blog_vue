@@ -17,7 +17,8 @@
 
                 this.$store.commit('posts/addPost', newPost)
                 this.$store.dispatch('posts/addPostToDB', newPost)
-                this.$refs.newPost.reset()           
+                this.$refs.newPost.reset() 
+                this.$store.commit('posts/setCreatePost', false)          
             },
             clearForm() {
                 this.$refs.newPost.reset()
