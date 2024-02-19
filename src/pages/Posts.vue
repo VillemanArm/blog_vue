@@ -10,37 +10,21 @@
             ...mapState({
                 isCreatePost: state => state.posts.isCreatePost,
                 isEditPost: state => state.posts.isEditPost,
-                editedPostId: state => state.posts.editedPostId,
                 isPostsLoading: state => state.posts.isPostsLoading,
-                posts: state => state.posts.posts,
                 sortOptions: state => state.posts.sortOptions,
-                    
-                sortOption: state => state.posts.sortOption,
-                searchQuery: state => state.posst.searchQuery,
-                page: state => state.posts.page,
-                limit: state => state.posts.limit,
-                totalPages: state => state.posts.totalPages,
-            }),
-            ...mapGetters({
-                sortedPosts: 'posts/sortedPosts',           
-                sortedAndSearchedPosts: 'posts/sortedAndSearchedPosts'
             }),
         },
         methods: {
             ...mapMutations({
-                setPage: 'posts/setPage',
                 setSearchQuery: 'posts/setSearchQuery',
                 setSortOption: 'posts/setSortOption',
                 setCreatePost: 'posts/setCreatePost',
-                addPost: 'posts/addPost',
-                delPost: 'posts/delPost',
                 setEditPost: 'posts/setEditPost',
             }),
             ...mapActions({
                 getPosts: 'posts/getPosts',
                 loadMorePosts:'posts/loadMorePosts',
             }),
-
         },
         mounted() {
             this.getPosts()      
@@ -103,30 +87,7 @@
     .posts-management__functions
         display: flex
         justify-content: end
-        gap: 8rem
-
-    .pages__wrapper
-        display: flex
-        gap: 8rem    
-        justify-content: center
-        margin-bottom: 16rem
-
-    .pages__button
-        min-width: 28rem
-        padding: 4rem
-
-        text-align: center
-
-        color: $light-font-color
-        background-color: $primary-color
-        cursor: pointer
-        border-radius: 4rem
-
-        &:hover
-            opacity: 0.75
-
-    .pages__current-page
-        opacity: 0.75
+        gap: 10rem
 
     .observer
         height: 10rem
