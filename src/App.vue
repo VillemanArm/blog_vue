@@ -3,39 +3,19 @@ import Navbar from "@/components/Navbar.vue"
 
 export default  {
     components: {Navbar},
-    props: {
-        // propsTemplate: {
-        //     type: Function,
-        //     required: true,
-        // },
-        },
-    data() {
-        return {
-        
-        }
-    },
-    methods: {
-
-    },
 }
 </script>
 
 <template>
     <div class="app">
         <navbar/>
-        <div class="container">
-            <router-view></router-view>
-        </div>
+        <router-view></router-view>
     </div>
 </template>
-
-<!-- <style href="./assets/main.sass" lang="sass"></style> -->
 
 <style lang='sass'>
     @import '@/assets/constants.sass'
     @import '@/assets/normalize'
-
-    // @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
 
     @font-face 
         font-family: 'Ubuntu'
@@ -63,8 +43,7 @@ export default  {
         font-size: 16rem
         font-family: 'Ubuntu', sans-serif
         font-weight: 400
-        color: $primary-color
-        
+        color: $primary-color       
 
     img
         width: 100%
@@ -82,5 +61,22 @@ export default  {
 
         background-color: $background-color
 
+    
+    .container
+        width: 900rem
+        margin: 0 auto
+        font-family: Ubuntu
+        box-sizing: border-box
+
+    @media (max-width: 920px)
+        html 
+            font-size: 0.108695652173913vw
+    
+    @media (max-width: 768px)
+        html 
+            font-size: 0.1736111111111111vw
+
+        .container
+            width: 560rem
 
 </style>

@@ -22,7 +22,14 @@
                 this.$store.commit('posts/delPost', this.post.id)
                 this.$store.dispatch('posts/delPostFromDB', this.post.id)
             }
+        },
+        mounted() {
+            if (this.post.body.length > 400) {
+                this.$refs.content.innerText = this.post.body.slice(0, 400) + "..."
+            } else 
+                this.$refs.content.innerText = this.post.body
         }
+
     }
 </script>
 
@@ -30,17 +37,17 @@
     <div className="post">
         <div className="post__buttons">
             <div className="post__button" @click="$router.push(`/posts/${post.id}`)">
-                <BookOpenText :size="28" />
+                <BookOpenText  />
             </div>
-            <div className="post__button">
-                <FileEdit :size="28" @click="editPost"/>
+            <div className="post__button" @click="editPost">
+                <FileEdit />
             </div>
             <div className="post__button" @click="delPost">
-                <Trash2 :size="28" />
+                <Trash2 />
             </div>
         </div>
         <h2>{{ post.title }}</h2>
-        <p class="content">{{ post.body }}</p>
+        <p ref="content" class="content"></p>
         <p class="date">{{ post.date }}</p>
     </div>
 </template>
@@ -48,7 +55,8 @@
 <style scoped lang="sass">
     @import '@/assets/constants.sass'
 
-    .post       
+    .post     
+        min-height: 28rem  
         margin-bottom: 12rem
         padding: 12rem 20rem 22rem 20rem
 
@@ -62,9 +70,15 @@
         float: right
         display: flex
         gap: 8rem
+        padding-left: 10rem
+
 
     .post__button
         cursor: pointer
+        
+        & > svg
+            width: 28rem !important
+            height: 28rem !important
 
     h2
         margin-bottom: 12rem

@@ -69,11 +69,6 @@
 <style lang="sass">
     @import "@/assets/constants.sass"
 
-    .container
-        width: 900rem
-        margin: 0 auto
-        font-family: Ubuntu
-        box-sizing: border-box
 
     .posts-management
         padding: 16rem 0
@@ -93,5 +88,6 @@
         height: 10rem
         position: relative
         bottom: 400rem
+
 </style>
 
