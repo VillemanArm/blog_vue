@@ -18,6 +18,10 @@
                 this.$store.commit('posts/setEditPost', true)
                 this.$store.commit('posts/setEditedPostIndex', this.postIndex)
             },
+            delPost() {
+                this.$store.commit('posts/delPost', this.post.id)
+                this.$store.dispatch('posts/delPostFromDB', this.post.id)
+            }
         }
     }
 </script>
@@ -31,7 +35,7 @@
             <div className="post__button">
                 <FileEdit :size="28" @click="editPost"/>
             </div>
-            <div className="post__button" @click="$store.commit('posts/delPost', this.post.id)">
+            <div className="post__button" @click="delPost">
                 <Trash2 :size="28" />
             </div>
         </div>

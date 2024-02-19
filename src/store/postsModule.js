@@ -20,7 +20,7 @@ export const postsModule = {
             ],
             sortOption: "",
             searchQuery: "",
-            serverURL: `https://gem-toothsome-leo.glitch.me/posts`,
+            serverURL: `https://gem-toothsome-leo.glitch.me/posts/`,
             page: 1,
             limit: 10,
             totalPages: 0,
@@ -117,7 +117,21 @@ export const postsModule = {
         },
         async addPostToDB({state}, newPost) {
             try {
-                const response = await axios.post(state.serverURL, newPost)
+                await axios.post(state.serverURL, newPost)
+            } catch (error) {
+                console.log(error.message)
+            } 
+        },
+        async delPostFromDB({state}, postId) {
+            try {
+                await axios.delete(state.serverURL + postId)
+            } catch (error) {
+                console.log(error.message)
+            } 
+        },
+        async editPostInDB({state}, editedPost) {
+            try {
+                await axios.put(state.serverURL + editedPost.id, editedPost)
             } catch (error) {
                 console.log(error.message)
             } 

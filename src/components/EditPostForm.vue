@@ -13,11 +13,13 @@
                     id: this.post.id,
                     title: this.$refs.postTitle.value.trim(),
                     body: this.$refs.postContent.value.trim(),
+                    date: this.post.date,
                 }
 
                 this.$store.commit('posts/editPost', editedPost)
                 this.$refs.editablePost.reset()
                 this.$store.commit('posts/setEditPost', false)
+                this.$store.dispatch('posts/editPostInDB', editedPost)
             },
             clearForm() {
                 this.$refs.editablePost.reset()
