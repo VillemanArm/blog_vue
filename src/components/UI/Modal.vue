@@ -10,6 +10,12 @@
             return {
             }
         },
+        mounted() {
+            document.body.style.overflow = 'hidden'
+        },
+        unmounted() {
+            document.body.style.overflow = 'auto'
+        }
     }
 </script>
 
@@ -31,7 +37,7 @@
 
 <style scoped lang="sass">
     @import '@/assets/constants.sass'
-    
+
     .modal__wrapper
         width: 100vw
         height: 100vh
@@ -43,6 +49,7 @@
         align-items: center
 
         background-color: rgb(0, 0, 0, 0.5)
+        overflow: hidden
 
     .modal
         width: 600rem
@@ -50,7 +57,8 @@
         padding: 16rem
 
         background-color: $background-color
-        border-radius: 12rem
+        clip-path: polygon(0 10rem, 10rem 0, 100% 0, 100% calc(100% - 10rem), calc(100% - 10rem) 100%, 0 100%,0 5rem)
+        
 
     .modal__head
         margin-bottom: 20rem

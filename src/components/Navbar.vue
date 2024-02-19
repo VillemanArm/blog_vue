@@ -32,7 +32,7 @@ export default  {
     .navbar
         height: 50rem
 
-        color: $secondary-color
+        color: $light-font-color
 
         background-color: $primary-color
 
@@ -49,6 +49,6 @@ export default  {
         gap: 16rem
 
         &>a
-            color: $secondary-color
+            color: $light-font-color
 
 </style>

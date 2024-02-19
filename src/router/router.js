@@ -1,4 +1,3 @@
-import Main from "@/pages/Main.vue"
 import Posts from "@/pages/Posts.vue"
 import About from "@/pages/About.vue"
 import PostPage from "@/pages/PostPage.vue"
