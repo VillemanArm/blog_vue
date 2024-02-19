@@ -15,7 +15,7 @@ export default  {
 <template>
     <div class="navbar">
         <div class="container">
-            <div class="navbar__logo" @click="$router.push('/')">Vue 3</div>
+            <div class="navbar__logo" @click="$router.push('/')">Blog on Vue 3</div>
             <div class="navbar__btns">
                 <router-link to="/">Posts list</router-link>
                 <router-link to="/about">About project</router-link>
@@ -34,7 +34,7 @@ export default  {
 
         color: $secondary-color
 
-        background-color: #325450
+        background-color: $primary-color
 
         &>.container
             height: 100%

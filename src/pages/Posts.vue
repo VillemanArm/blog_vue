@@ -55,6 +55,7 @@
             <AppInput id="search-input"
             class="posts__search-input"
             :changeFunc="setSearchQuery"
+            :placeholder="'⌕'"
             />
             <AppSelect id="sort-select"
             class="posts__sort-select"
@@ -116,7 +117,7 @@
 
         text-align: center
 
-        color: $secondary-color
+        color: $light-font-color
         background-color: $primary-color
         cursor: pointer
         border-radius: 4rem

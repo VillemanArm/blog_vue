@@ -46,16 +46,18 @@
 </template>
 
 <style scoped lang="sass">
-    .post
-        
+    @import '@/assets/constants.sass'
+
+    .post       
         margin-bottom: 12rem
-        padding: 12rem 20rem
+        padding: 12rem 20rem 22rem 20rem
 
         font-size: 16rem
-        font-family: 'Ubuntu'
+        font-family: 'Ubuntu', sans-serif
+        color: $dark-font-color
 
-        border-radius: 12rem
-        box-shadow: 1rem 4rem 9rem 4rem rgba(0, 0, 0, 0.6)
+        clip-path: polygon(0 0,100% 0,100% calc(100% - 20rem), calc(100% - 10rem) calc(100% - 10rem), 10rem calc(100% - 10rem), 0 100%,0 5rem)
+        background-color: $primary-color
     .post__buttons
         float: right
         display: flex
@@ -69,4 +71,6 @@
 
     .date
         margin-top: 8rem
+       
+
 </style>

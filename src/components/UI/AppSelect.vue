@@ -42,6 +42,7 @@
     select 
         height: 24rem
 
-        border-radius: 6rem
+        clip-path: polygon(0 6rem, 6rem 0, 100% 0, 100% calc(100% - 6rem), calc(100% - 6rem) 100%, 0 100%,0 6rem)
         outline: none
+        cursor: pointer
 </style>

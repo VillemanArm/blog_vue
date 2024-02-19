@@ -30,6 +30,8 @@
 </template>
 
 <style scoped lang="sass">
+    @import '@/assets/constants.sass'
+    
     .modal__wrapper
         width: 100vw
         height: 100vh
@@ -47,7 +49,7 @@
         height: 450rem
         padding: 16rem
 
-        background-color: #fff
+        background-color: $background-color
         border-radius: 12rem
 
     .modal__head

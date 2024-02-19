@@ -7,6 +7,9 @@ props: {
         type: Function,
         required: true,
     },
+    placeholder: {
+        type: String
+    }
 },
 name: "AppInput",
 data() {
@@ -21,7 +24,7 @@ methods: {
 </script>
 
 <template>
-    <input type="text" @input="(event) => {changeFunc(event.target.value)}">
+    <input type="text" :placeholder="placeholder" @input="(event) => {changeFunc(event.target.value)}">
 </template>
 
 <style scoped lang='sass'>
@@ -29,7 +32,10 @@ methods: {
         height: 24rem
         padding: 0 4rem
 
-        border-radius: 6rem
+        clip-path: polygon(0 6rem, 6rem 0, 100% 0, 100% calc(100% - 6rem), calc(100% - 6rem) 100%, 0 100%,0 6rem)
         outline: none
         border: 1rem solid #000
+
+        &::placeholder
+            font-size: 25rem
 </style>

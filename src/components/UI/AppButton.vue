@@ -11,7 +11,9 @@
 
 <template>
     <button type="button">
-        <slot></slot>
+        <div>
+            <slot></slot>
+        </div>
     </button>
 </template>
 
@@ -19,19 +21,26 @@
     @import "../../assets/constants.sass"
 
     button
-        padding: 4rem 10rem
+        padding: 2rem
         box-sizing: border-box
 
         text-transform: uppercase
 
-        background-color: transparent
+        background-color: $primary-color
         outline: 0
         border: 3rem solid $primary-color
-        border-radius: 12rem
         cursor: pointer
         color: $primary-color
+        clip-path: polygon(0 10rem, 10rem 0, 100% 0, 100% calc(100% - 10rem), calc(100% - 10rem) 100%, 0 100%,0 5rem)
 
-        &:hover
-            color: $secondary-color
-            background-color: $primary-color
+
+        &>div
+            width: 100%
+            height: 100%
+            background-color: $background-color
+            clip-path: polygon(0 7rem, 7rem 0, 100% 0, 100% calc(100% - 7rem), calc(100% - 7rem) 100%, 0 100%,0 7rem)
+            
+            &:hover
+                color: $light-font-color
+                background-color: $primary-color
 </style>

@@ -61,10 +61,10 @@ export default  {
     body
         min-height: 100vh
         font-size: 16rem
-    //     background-color: $background-color
         font-family: 'Ubuntu', sans-serif
         font-weight: 400
         color: $primary-color
+        
 
     img
         width: 100%
@@ -73,6 +73,14 @@ export default  {
 
     a
         text-decoration: none
+
+        &:hover
+            text-decoration: underline
+
+    .app
+        min-height: 100vh
+
+        background-color: $background-color
 
 
 </style>

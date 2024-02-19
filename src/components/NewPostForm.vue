@@ -54,7 +54,8 @@
             padding: 4rem 8rem
 
             font-family: Ubuntu, sans-serif
-            border-radius: 8rem
+            clip-path: polygon(0 6rem, 6rem 0, 100% 0, 100% calc(100% - 6rem), calc(100% - 6rem) 100%, 0 100%,0 6rem)
+            outline: none
 
         & textarea
             height: 270rem
