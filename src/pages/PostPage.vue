@@ -18,9 +18,7 @@ export default  {
     methods: {
         async getPost() {
                 try {
-                    const response = await axios.get(
-                        `https://jsonplaceholder.typicode.com/posts/${this.id}`, 
-                    )
+                    const response = await axios.get(this.$store.state.posts.serverURL + this.id)
                     this.post = response.data
                 } catch (error) {
                     console.log(error.message)
@@ -36,10 +34,14 @@ export default  {
 </script>
 
 <template>
-    <div>
-        <h1>This is page for post with ID = {{ id }}</h1>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.body }}</p>
+    <div class='container'>
+        <div v-if="!$store.state.posts.isPostsLoading">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.body }}</p>
+        </div>
+        <div v-else class="loader-wrapper">
+            <AppLoader />            
+        </div>
     </div>    
 </template>
 

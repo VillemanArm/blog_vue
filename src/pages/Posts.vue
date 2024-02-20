@@ -27,7 +27,7 @@
             }),
         },
         mounted() {
-            this.getPosts()      
+            this.getPosts()     
         },
     }
 </script>
@@ -49,12 +49,13 @@
             ></AppSelect>
         </div>
     </section>
-    
     <section class="container">
         <PostList
         v-if="!isPostsLoading"
         />
-        <div v-else>Posts is loading</div>
+        <div v-else class="loader-wrapper">
+            <AppLoader />            
+        </div>
         <div v-intersection="{ loadMorePosts }" ref="observer" class="observer"></div>
     </section>
     
@@ -68,7 +69,6 @@
 
 <style lang="sass">
     @import "@/assets/constants.sass"
-
 
     .posts-management
         padding: 16rem 0
@@ -88,6 +88,13 @@
         height: 10rem
         position: relative
         bottom: 400rem
+
+    .loader-wrapper
+        width: 100%
+        height: 86vh
+        display: flex
+        justify-content: center
+        align-items: center
 
 </style>
 
