@@ -56,6 +56,9 @@ export default  {
         &:hover
             text-decoration: underline
 
+    p, ul
+        margin-bottom: 12rem
+
     .app
         min-height: 100vh
 
