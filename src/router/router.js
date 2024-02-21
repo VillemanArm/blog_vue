@@ -5,15 +5,16 @@ import { createRouter, createWebHistory } from "vue-router"
 
 const routes = [
     {
-        path: '/',
+        path: '/works/blog_vue/',
         component: Posts,
+        // redirect: to => ({ path: '/works/blog_vue/' })
     },
     {
-        path: '/about',
+        path: '/works/blog_vue/about',
         component: About,
     },
     {
-        path: '/posts/:id',
+        path: '/works/blog_vue/posts/:id',
         component: PostPage,
     },
 ]

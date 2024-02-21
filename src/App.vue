@@ -3,11 +3,14 @@ import Navbar from "@/components/Navbar.vue"
 
 export default  {
     components: {Navbar},
+    mounted() {
+        this.$router.push('/works/blog_vue/')
+    }
 }
 </script>
 
 <template>
-    <div class="app">
+    <div id="app" class="app">
         <navbar/>
         <router-view></router-view>
     </div>

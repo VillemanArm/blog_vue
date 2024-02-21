@@ -36,7 +36,7 @@
 <template>
     <div className="post">
         <div className="post__buttons">
-            <div className="post__button" @click="$router.push(`/posts/${post.id}`)">
+            <div className="post__button" @click="$router.push(`/works/blog_vue/posts/${post.id}`)">
                 <BookOpenText  />
             </div>
             <div className="post__button" @click="editPost">

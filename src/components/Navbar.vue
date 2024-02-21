@@ -15,10 +15,10 @@ export default  {
 <template>
     <div class="navbar">
         <div class="container">
-            <div class="navbar__logo" @click="$router.push('/')">Blog on Vue 3</div>
+            <div class="navbar__logo" @click="$router.push('/works/blog_vue/')">Blog on Vue 3</div>
             <div class="navbar__btns">
-                <router-link to="/">Posts list</router-link>
-                <router-link to="/about">About project</router-link>
+                <router-link to="/works/blog_vue/">Posts list</router-link>
+                <router-link to="/works/blog_vue/about">About project</router-link>
             </div>
         </div>
 
